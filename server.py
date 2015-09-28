@@ -33,17 +33,23 @@ def url_handler():
 	source_html = get_html(html_object)
 
 	# create dictionary of tags and counts
-	tag_count = {}
+	tags = {}
 	html_tree = lxml.html.fromstring(source_html)
 	for element in html_tree.iter():
-		print(element.tag)
+		if not tags.get(element.tag):
+			tags[element.tag] = 0
+		tags[element.tag] += 1
+
+	print tags
 
 	# excape < > and & characters so html can be displayed
 	escaped_html = encode_html(source_html)
 
 	# add spans in order to highlight tags in template
 	
-	return escaped_html
+	return render_template('results.html', 
+							escaped_html=escaped_html,
+							tags=tags)
 
 ####################################################
 
