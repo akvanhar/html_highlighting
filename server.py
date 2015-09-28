@@ -6,6 +6,10 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from jinja2 import StrictUndefined
 
+from cgi import escape
+
+from parse import get_html
+
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_TOKEN']
 
@@ -18,7 +22,9 @@ def home():
 @app.route('/url_handler')
 def url_handler():
 	url = request.args.get('url')
-	return url
+	source_html = str(get_html(url))
+	escaped_html = escape(source_html)
+	return escaped_html
 
 ####################################################
 
