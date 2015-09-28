@@ -13,12 +13,19 @@
 			<input class='submit' type='submit'>
 		</label>
 	</form>
+	<div class="after_click" style="display: none">
+		<h1>Website: <span id="website"></span></h1>
+		<h2>Source HTML:</h2>
+	</div>
 	<div id="sourcehtml">
 	</div>
 	<script>
 		function displayHtml(evt){
 			evt.preventDefault();
 			url = $('#url').val();
+			display_url = url.slice(7);
+			$('.after_click').css('display', 'block');
+			$('#website').html(display_url);
 			$.get("/url_handler", {'url': url}, function(data){
 				$('#sourcehtml').html(data);
 			});
