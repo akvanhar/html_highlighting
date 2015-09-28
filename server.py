@@ -15,10 +15,9 @@ app.jinja_env.undefined = StrictUndefined
 def home():
 	return render_template('home.html')
 
-@app.route('url_handler')
+@app.route('/url_handler')
 def url_handler():
-	url = response.args.get('url')
-	print url
+	url = request.args.get('url')
 	return url
 
 ####################################################

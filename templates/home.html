@@ -9,7 +9,7 @@
 <body>
 	<form action='url_handler'>
 		<label for='url'>Please input a url:
-			<input class='urlBox' type='text' id='url'>
+			<input class='urlBox' type='text' id='url' name='url'>
 			<input class='submit' type='submit'>
 		</label>
 	</form>
@@ -18,8 +18,8 @@
 	<script>
 		function displayHtml(evt){
 			evt.preventDefault();
-			url = $('.urlBox').val();
-			$.get("/url_handler", url, function(data){
+			url = $('#url').val();
+			$.get("/url_handler", {'url': url}, function(data){
 				console.log(data);
 			});
 		}
