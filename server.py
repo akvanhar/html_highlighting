@@ -8,7 +8,7 @@ from jinja2 import StrictUndefined
 
 from cgi import escape
 
-from parse import get_html
+from parse import get_html, encode_html
 
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_TOKEN']
@@ -22,8 +22,8 @@ def home():
 @app.route('/url_handler')
 def url_handler():
 	url = request.args.get('url')
-	source_html = str(get_html(url))
-	escaped_html = escape(source_html)
+	source_html = get_html(url)
+	escaped_html = encode_html(source_html)
 	return escaped_html
 
 ####################################################
