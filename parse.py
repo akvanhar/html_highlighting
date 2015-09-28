@@ -1,15 +1,11 @@
-from bs4 import BeautifulSoup
+import requests
 import urllib2
 import cgi
 
-def get_html(url):
+def get_html(html_object):
 	# takes a url as a string and 
 	# returns the html from that page as a string
-
-	url = url
-	page = urllib2.urlopen(url)
-	html_string = str(BeautifulSoup(page.read()))
-	return html_string
+	return html_object.text
 
 def encode_html(html_string):
 	# takes a string of html
