@@ -2,11 +2,9 @@ import os
 from flask import (Flask, render_template, redirect, request, flash)
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
-from cgi import escape
-from parse import get_html, encode_html
-import urllib2
+from parse import get_html, encode_html, create_count
 import requests
-import lxml.html
+
 
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_TOKEN']
@@ -33,14 +31,7 @@ def url_handler():
 	source_html = get_html(html_object)
 
 	# create dictionary of tags and counts
-	tags = {}
-	html_tree = lxml.html.fromstring(source_html)
-	for element in html_tree.iter():
-		if not tags.get(element.tag):
-			tags[element.tag] = 0
-		tags[element.tag] += 1
-
-	print tags
+	tags = create_count(source_html)
 
 	# excape < > and & characters so html can be displayed
 	escaped_html = encode_html(source_html)
@@ -48,6 +39,7 @@ def url_handler():
 	# add spans in order to highlight tags in template
 	
 	return render_template('results.html', 
+							url=url,
 							escaped_html=escaped_html,
 							tags=tags)
 

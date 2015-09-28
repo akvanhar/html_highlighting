@@ -8,13 +8,10 @@
 </head>
 <body>
 	<div>
-		<h1>Website: <span id="website"></span></h1>
+		<h1>Website: {{ url }}</h1>
 		<h2>Source HTML:</h2>
 	</div>
-	<div id="sourcehtml">
-		{{ escaped_html }}
-	</div>
-	<div id="table" style='float: right'>
+	<div id="table">
 		<table>
 			<thead>
 				<tr>
@@ -25,12 +22,15 @@
 			<tbody>
 				{% for tag in tags %}
 					<tr>
-						<td>{{ tag }}</td>
+						<td data-id='{{ tag }}'>{{ tag }}</td>
 						<td>{{ tags[tag] }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
+	</div>
+	<div id="sourcehtml">
+		{{ escaped_html }}
 	</div>
 </body>
 </html>
