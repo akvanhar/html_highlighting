@@ -9,7 +9,7 @@
 <body>
 		<h1>Website: {{ url }}</h1>
 		<h2>Source HTML:</h2>
-		<table>
+		<table class="toHighlight">
 			<thead>
 				<tr>
 					<th>Tag</th>
@@ -19,14 +19,25 @@
 			<tbody>
 				{% for tag in tags %}
 					<tr>
-						<td data-id='{{ tag }}'>{{ tag }}</td>
+						<td class="tag" data-id='{{ tag }}'>{{ tag }}</td>
 						<td>{{ tags[tag] }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-	<div>
+	<div class="toHighlight">
 		{{ html|safe }}
 	</div>
+	<script>
+		function highlight(evt){
+			targetTag = $(evt.currentTarget).data().id;
+			targetClass = '.all-'+targetTag;
+			$("*").css('background-color', "");
+			$(targetClass).css('background-color', '#59CDFF');
+			$(this).css('background-color', '#59CDFF');
+			$(this).next().css('background-color', '#59CDFF');
+		}
+		$('.tag').click(highlight);
+	</script>
 </body>
 </html>

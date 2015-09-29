@@ -2,7 +2,7 @@ import os
 from flask import (Flask, render_template, redirect, request, flash)
 from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
-from parse import get_html, encode_html, create_count
+from parse import get_html, encode_html, create_count, add_spans
 import requests
 import re
 
@@ -29,22 +29,16 @@ def url_handler():
 			    Please enter a new URL.'
 
 	# decode requests unicode object
-	source_html = get_html(html_object)
+	html = get_html(html_object)
 
 	# create dictionary of tags and counts
-	tags = create_count(source_html)
+	tags = create_count(html)
 
 	# excape < > and & characters so html can be displayed
-	html = encode_html(source_html)
+	html = encode_html(html)
 
-	# add spans in order to highlight tags in template
-	# open_tag = "&lt;"
-	# match_obj = re.findall("&lt;", html)
-	# add opening span tags with classes
-	# add closing span tags
-	# html = re.sub("(&lt;\w+)", '<span class="opening tag">&lt;', html)
-	# html = re.sub('&gt;', '&gt;</span><br>', html)
-	# print html
+	# wrap individual tags with spans so they can be highlighted
+	html = add_spans(html)
 	
 	return render_template('results.html', 
 							url=url,
