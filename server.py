@@ -4,6 +4,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from jinja2 import StrictUndefined
 from parse import get_html, encode_html, create_count
 import requests
+import re
 
 
 app = Flask(__name__)
@@ -34,13 +35,20 @@ def url_handler():
 	tags = create_count(source_html)
 
 	# excape < > and & characters so html can be displayed
-	escaped_html = encode_html(source_html)
+	# html = encode_html(source_html)
 
 	# add spans in order to highlight tags in template
+	# open_tag = "&lt;"
+	# match_obj = re.findall("&lt;", escaped_html)
+	# add opening span tags with classes
+	# add closing span tags
+	# html = re.sub("&lt;", '<span>&lt;', escaped_html)
+	# html = re.sub('&gt;', '&gt;</span><br>', html)
+	# print html
 	
 	return render_template('results.html', 
 							url=url,
-							escaped_html=escaped_html,
+							html=source_html,
 							tags=tags)
 
 ####################################################

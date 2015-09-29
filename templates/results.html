@@ -7,11 +7,8 @@
 	</title>
 </head>
 <body>
-	<div>
 		<h1>Website: {{ url }}</h1>
 		<h2>Source HTML:</h2>
-	</div>
-	<div id="table">
 		<table>
 			<thead>
 				<tr>
@@ -28,9 +25,8 @@
 				{% endfor %}
 			</tbody>
 		</table>
-	</div>
-	<div id="sourcehtml">
-		{{ escaped_html }}
+	<div>
+		{{ html }}
 	</div>
 </body>
 </html>
