@@ -46,7 +46,7 @@ def add_spans(html):
 
 	# replace closing tags, but don't include the / in theh class
 	html = re.sub('&lt;(\/+)([A-Z|a-z]+[0-9]*)', add_close_span, html)
-	html = html.replace("&gt;", "&gt;</span><br>")
+	html = html.replace("&gt;", "&gt;</span>")
 
 	return html
 # span class=div>&lt;div&gt;</span><br
