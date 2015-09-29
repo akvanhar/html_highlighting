@@ -27,4 +27,10 @@ def create_count(html_string):
 		if not tags.get(element.tag):
 			tags[element.tag] = 0
 		tags[element.tag] += 1
+		element.tag = "span class="+element.tag+">&lt;"+element.tag+"&gt;</span><br"
+		# element = "<span class="+element+">"+element+"</span>"
+		print element.tag, type(element.tag)
 	return tags
+
+
+# span class=div>&lt;div&gt;</span><br

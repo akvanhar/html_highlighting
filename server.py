@@ -35,20 +35,20 @@ def url_handler():
 	tags = create_count(source_html)
 
 	# excape < > and & characters so html can be displayed
-	# html = encode_html(source_html)
+	html = encode_html(source_html)
 
 	# add spans in order to highlight tags in template
 	# open_tag = "&lt;"
-	# match_obj = re.findall("&lt;", escaped_html)
+	# match_obj = re.findall("&lt;", html)
 	# add opening span tags with classes
 	# add closing span tags
-	# html = re.sub("&lt;", '<span>&lt;', escaped_html)
+	# html = re.sub("(&lt;\w+)", '<span class="opening tag">&lt;', html)
 	# html = re.sub('&gt;', '&gt;</span><br>', html)
 	# print html
 	
 	return render_template('results.html', 
 							url=url,
-							html=source_html,
+							html=html,
 							tags=tags)
 
 ####################################################
